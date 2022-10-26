@@ -13,6 +13,9 @@ const expelledArray = [
     house: "Slytherin",
   }
 ];
+const houseArray = [
+ "Gryffindor", "Slytherin", "Ravenclaw", "Hufflepuff",
+];
 
 //RENDER TO DOM
 const renderToDom = (divId, htmlToRender) => {
@@ -27,6 +30,13 @@ const filter = document.querySelector('#filterDOM');
 const hogwartsStudents = document.querySelector('#studentCardsDOM');
 const expelledStudents = document.querySelector('#expelledCardsDOM');
 
+//House Sorting Function
+const randomizerFunction = () => {
+  let randomizer = Math.floor(Math.random() * houseArray.length);
+  return houseArray[randomizer];
+};
+
+
 //HTML Functions
 const welcomeButtonFunction = () => {
   const domString = `
@@ -37,18 +47,16 @@ const welcomeButtonFunction = () => {
 
 const formFunction = () => {
   const domString = `
-    <div>
+    <form>
       <h4>Enter First Year's Name</h4>
-      <form>
-        <div class="form-floating mb-3">
-          <input type="string" class="form-control" id="floatingInput" placeholder="Harry Potter" id="name">
-          <label for="floatingInput">Student's Name</label>
-        </div>
-        <div class="col-12">
-          <button class="btn btn-primary" type="submit">Submit form</button>
-        </div>
-      </form>
-    </div>
+      <div class="form-floating mb-3">
+        <input type="string" class="form-control" placeholder="Harry Potter" id="name" required>
+        <label for="name">Student's Name</label>
+      </div>
+      <div class="col-12">
+        <button class="btn btn-primary" type="submit">Submit form</button>
+      </div>
+    </form>
   `;
   renderToDom("#formDOM", domString);
 }
@@ -56,14 +64,14 @@ const formFunction = () => {
 const filterFunction = () => {
   const domString = `
     <div>
-    <h4>Filter Students</h4>
-    <div id="filterStudents">
-      <button type="button" class="btn btn-primary">Gryffindor</button>
-      <button type="button" class="btn btn-success">Slytherin</button>
-      <button type="button" class="btn btn-danger">Ravenclaw</button>
-      <button type="button" class="btn btn-warning">Hufflepuff</button>
-      <button type="button" class="btn btn-info">All students</button>
-    </div>
+      <h4>Filter Students</h4>
+      <div id="filterStudents">
+        <button type="button" class="btn btn-primary">Gryffindor</button>
+        <button type="button" class="btn btn-success">Slytherin</button>
+        <button type="button" class="btn btn-danger">Ravenclaw</button>
+        <button type="button" class="btn btn-warning">Hufflepuff</button>
+        <button type="button" class="btn btn-info">All students</button>
+      </div>
     </div>  
   `;
   renderToDom("#filterDOM", domString);
@@ -110,16 +118,15 @@ const expelledCardsFunction = (array) => {
 
 //New Student Function
 const newStudent = (event) => {
-  console.log(1)
   event.preventDefault();
   const newStudentObj = {
     id: studentsArray.length + 1,
     name: document.querySelector("#name").value,
-    // house: document.querySelector("#house"),
+    house: randomizerFunction(),
   }
-  console.log('Still working')
   studentsArray.push(newStudentObj);
   studentCardsFunction(studentsArray);
+  form.reset();
 }
 form.addEventListener('submit', newStudent)
 
