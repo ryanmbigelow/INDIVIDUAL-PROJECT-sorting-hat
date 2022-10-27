@@ -1,16 +1,27 @@
 //Arrays
-const studentsArray = [
-  {
+const studentsArray = [{
     id: 1,
     name: "Ryan",
     house: "Slytherin",
+  }, {
+    id: 1,
+    name: "Tyler",
+    house: "Gryffindor",
+  }, {
+    id: 1,
+    name: "DeAndre",
+    house: "Ravenclaw",
+  }, {
+    id: 1,
+    name: "Dro",
+    house: "Hufflepuff",
   }
 ];
 const expelledArray = [
   {
     id: 1,
-    name: "Ryan",
-    house: "Slytherin",
+    name: "Barry",
+    house: "Moldy Voldy's Army",
   }
 ];
 const houseArray = [
@@ -47,7 +58,7 @@ const welcomeButtonFunction = () => {
 
 const formFunction = () => {
   const domString = `
-    <form>
+    <form id=submitStudent>
       <h4>Enter First Year's Name</h4>
       <div class="form-floating mb-3">
         <input type="string" class="form-control" placeholder="Harry Potter" id="name" required>
@@ -66,38 +77,38 @@ const filterFunction = () => {
     <div>
       <h4>Filter Students</h4>
       <div id="filterStudents">
-        <button type="button" class="btn btn-primary">Gryffindor</button>
-        <button type="button" class="btn btn-success">Slytherin</button>
-        <button type="button" class="btn btn-danger">Ravenclaw</button>
-        <button type="button" class="btn btn-warning">Hufflepuff</button>
-        <button type="button" class="btn btn-info">All students</button>
+        <button id="#showGryffindor" type="button" class="btn btn-primary">Gryffindor</button>
+        <button id="#showSlytherin" type="button" class="btn btn-success">Slytherin</button>
+        <button id="#showRavenclaw" type="button" class="btn btn-danger">Ravenclaw</button>
+        <button id="#showHufflepuff" type="button" class="btn btn-warning">Hufflepuff</button>
+        <button id="#showAll" type="button" class="btn btn-info">All students</button>
       </div>
-    </div>  
+    </div>
   `;
   renderToDom("#filterDOM", domString);
 }
 
 const studentCardsFunction = (array) => {
   let domString = ``
-  for (const student of array) {
+  array.forEach((student) => {
     domString += `
-      <div class="card mb-3" style="max-width: 540px;">
-        <div class="row g-0">
-          <div class="col-md-4">
-            <img src="..." class="img-fluid rounded-start" alt="...">
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title">Sudent: ${student.name}</h5>
-              <h5 class="card-title">House: ${student.house}</h5>
-            </div>
+    <div class="card mb-3" style="max-width: 540px;">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="..." class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">Sudent: ${student.name}</h5>
+            <h5 class="card-title">House: ${student.house}</h5>
           </div>
         </div>
       </div>
-    `;
+    </div>
+  `;
   renderToDom("#studentCardsDOM", domString);
-  }
-}
+  });
+};
 
 const expelledCardsFunction = (array) => {
   let domString = ``
@@ -126,16 +137,43 @@ const newStudent = (event) => {
   }
   studentsArray.push(newStudentObj);
   studentCardsFunction(studentsArray);
-  form.reset();
+  document.querySelector('#submitStudent').reset();
 }
 form.addEventListener('submit', newStudent)
+
+//Filter students
+const filterStudents = (event) => {
+  if(event.target.id.includes("filterDOM")) {
+    console.log('griff')
+  }
+}
+// const filterStudents = (studentsArray, house) => {
+//   console.log('filter1')
+//   const filterStudentsArray = [];
+//   for (const student of studentsArray) {
+//     console.log('filter2')
+//     if (student.house === house) {
+//       filterStudentsArray.push(student);
+//     }
+//   }
+//   console.log('filter works')
+//   return filterStudentsArray;
+// };
+
+// const gryffindorButton = document.querySelector('#showGryffindor');
+// gryffindorButton.addEventListener('click', () => {
+//   const gryffindor = filterStudents(studentsArray, 'Gryffindor');
+//   studentCardsFunction(gryffindor);
+// });
 
 //Rendering the page
 const displayPage = () => {
   formFunction();
   filterFunction();
   studentCardsFunction(studentsArray);
-  expelledCardsFunction(studentsArray);
+  expelledCardsFunction(expelledArray);
+  filterStudents();
+  document.querySelector('#filterDOM').addEventListener((click), filterFunction)
 }
 
 welcome.addEventListener('click', () => {
