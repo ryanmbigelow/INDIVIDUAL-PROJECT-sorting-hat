@@ -37,7 +37,6 @@ const renderToDom = (divId, htmlToRender) => {
 //Query Selectors
 const welcome = document.querySelector('#welcomeButtonDOM');
 const form = document.querySelector('#formDOM');
-const filter = document.querySelector('#filterDOM');
 const hogwartsStudents = document.querySelector('#studentCardsDOM');
 const expelledStudents = document.querySelector('#expelledCardsDOM');
 
@@ -77,11 +76,11 @@ const filterFunction = () => {
     <div>
       <h4>Filter Students</h4>
       <div id="filterStudents">
-        <button id="#showGryffindor" type="button" class="btn btn-primary">Gryffindor</button>
-        <button id="#showSlytherin" type="button" class="btn btn-success">Slytherin</button>
-        <button id="#showRavenclaw" type="button" class="btn btn-danger">Ravenclaw</button>
-        <button id="#showHufflepuff" type="button" class="btn btn-warning">Hufflepuff</button>
-        <button id="#showAll" type="button" class="btn btn-info">All students</button>
+        <button id="#filter--gryffindor" type="button" class="btn btn-primary">Gryffindor</button>
+        <button id="#filter--slytherin" type="button" class="btn btn-success">Slytherin</button>
+        <button id="#filter--ravenclaw" type="button" class="btn btn-danger">Ravenclaw</button>
+        <button id="#filter--hufflepuff" type="button" class="btn btn-warning">Hufflepuff</button>
+        <button type="button" class="btn btn-info">All students</button>
       </div>
     </div>
   `;
@@ -102,6 +101,7 @@ const studentCardsFunction = (array) => {
             <h5 class="card-title">Sudent: ${student.name}</h5>
             <h5 class="card-title">House: ${student.house}</h5>
           </div>
+          <button id="expelButton" type="button" class="btn btn-secondary">Expel</button>
         </div>
       </div>
     </div>
@@ -141,39 +141,26 @@ const newStudent = (event) => {
 }
 form.addEventListener('submit', newStudent)
 
-//Filter students
-const filterStudents = (event) => {
-  if(event.target.id.includes("filterDOM")) {
-    console.log('griff')
-  }
-}
-// const filterStudents = (studentsArray, house) => {
-//   console.log('filter1')
-//   const filterStudentsArray = [];
-//   for (const student of studentsArray) {
-//     console.log('filter2')
-//     if (student.house === house) {
-//       filterStudentsArray.push(student);
-//     }
-//   }
-//   console.log('filter works')
-//   return filterStudentsArray;
-// };
 
-// const gryffindorButton = document.querySelector('#showGryffindor');
-// gryffindorButton.addEventListener('click', () => {
-//   const gryffindor = filterStudents(studentsArray, 'Gryffindor');
-//   studentCardsFunction(gryffindor);
-// });
+
+//Filter students
+const filterStudents = () => {
+  const filter = document.querySelector('#filterDOM');
+  filter.addEventListener('click', (e) => {
+    if(e.target.id.includes("filter")) {
+      const [, house] = e.target.id.split('--');
+      const filterStudentsArray = studentsArray.filter(student => student.house === house)
+      studentCardsFunction(filterStudentsArray);
+      renderToDom("#studentCardsDOM", filterStudentsArray);
+      console.log(house);
+    }
+  })
+};
 
 //Rendering the page
 const displayPage = () => {
   formFunction();
-  filterFunction();
-  studentCardsFunction(studentsArray);
-  expelledCardsFunction(expelledArray);
-  filterStudents();
-  document.querySelector('#filterDOM').addEventListener((click), filterFunction)
+  // document.querySelector('#filterDOM').addEventListener((click), filterFunction)
 }
 
 welcome.addEventListener('click', () => {
@@ -183,6 +170,10 @@ welcome.addEventListener('click', () => {
 })
 
 const startApp = () => {
+  filterFunction();
+  studentCardsFunction(studentsArray);
+  expelledCardsFunction(expelledArray);
   welcomeButtonFunction();
+  filterStudents();
 }
 startApp();
