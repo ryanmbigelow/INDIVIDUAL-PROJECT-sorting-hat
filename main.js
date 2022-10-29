@@ -63,7 +63,7 @@ const formFunction = () => {
         <label for="name">Student's Name</label>
       </div>
       <div class="col-12">
-        <button class="btn btn-primary" type="submit">Submit form</button>
+        <button class="btn btn-primary" type="submit">Sort</button>
       </div>
     </form>
   `;

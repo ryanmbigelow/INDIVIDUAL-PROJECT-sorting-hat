@@ -55,3 +55,29 @@ Think of a way you can expel students without just hiding those divs on the page
 - House Colors: The color of the student's card changes depending on which house they were sorted.
 - Card Sorting/Ordering: Sort the student cards by some criteria (i.e. alphabetically by name, by house)
 
+## MY README
+                                                        The Magic Sorting Hat
+
+Overview: The Magic Sorting Hat allows a user to randomly sort any amount of students into one of four Harry Potter houses. A user can filter students by house and remove a student from "Hogwarts" altogether, banishing them to "Voldemort's army".
+
+Prototype: N/A
+
+Data flowchart: https://docs.google.com/presentation/d/1o1HsmMU1CDAJcDzbOMRRE5w6Rz4JAOuDlsNyFUJyV8g/edit#slide=id.g1718aa16489_0_81
+
+Deployed project: https://mellifluous-raindrop-b967b2.netlify.app/
+
+Project board: https://github.com/ryanmbigelow/INDIVIDUAL-PROJECT-sorting-hat/issues
+
+The user and the problem: The user needs to randomly sort people. This functionality could be great for a teacher who needs to randomly assign students into groups or teams. It would work well at work to randomly assign tasks (e.g. Slyhterins take out the trash, Gryffindors clean the kitchen, etc.). The problem is that you don't want there to be any bias when sorting into teams. The randomizer eliminates the bias and mixes up which individuals are set to work together.
+
+List of features:
+- Click "Discover your house" button to unveils a form
+- Input a name into the form and select "Sort"
+- Sort button generates an object
+- Each new object generates a random house: Gryffindor, Slytherin, Ravenclaw, Hufflepuff
+- New student object displays with a color-coded banner in the "Students" section on the left-hand side
+- On the right hand side the banished students are displayed in "Voldemort's Army"
+- Select a filter button to display only Gryffindors, Slytherins, Ravenclaws, Hufflepuffs, or all students
+- Select "Expel" to move a student to Voldemort's army
+
+Contributors: https://github.com/ryanmbigelow
