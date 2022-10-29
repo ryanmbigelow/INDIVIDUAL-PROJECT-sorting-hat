@@ -1,4 +1,149 @@
+body {
+  background-color: rgb(255, 241, 215);
+}
+
 #allCards {
   display: flex;
   flex-wrap: wrap;
+}
+
+#allCards * > {
+flex: 1;
+}
+
+#studentCardsDOM {
+  display: flex;
+  flex-wrap: wrap;
+  width: 50%;
+  gap: 5%;
+  justify-content: space-evenly;
+}
+
+#expelledCardsDOM {
+  display: flex;
+  flex-wrap: wrap;
+  width: 50%;
+  gap: 5%;
+  justify-content: space-evenly;
+}
+
+#Gryffindor {
+  background-color: maroon;
+}
+
+#Slytherin {
+  background-color: green;
+}
+
+#Ravenclaw {
+  background-color: navy;
+}
+
+#Hufflepuff {
+  background-color: goldenrod;
+}
+
+#voldysArmy {
+  background-color: grey;
+}
+
+h1 {
+  text-align: center;
+  margin: 1%;
+  color: rgb(21, 21, 21);
+}
+
+#welcomeButtonDOM {
+  display: flex;
+  justify-content: center;
+  margin: 1%;
+  color: rgb(21, 21, 21);
+}
+
+#formDOM {
+  display: flex;
+  justify-content: center;
+  margin: 1%;
+  color: rgb(21, 21, 21);
+}
+
+#filterStudents {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin: 1% 0%;
+}
+
+#filterDOM {
+  text-align: center;
+}
+
+#filter--gryffindor {
+  width: 20%;
+  background-color: maroon;
+  color: antiquewhite;
+  border: 0px solid black;
+}
+
+#filter--slytherin {
+  width: 20%;
+  background-color: green;
+  color: antiquewhite;
+  border: 0px solid black;
+}
+
+#filter--ravenclaw {
+  width: 20%;
+  background-color: navy;
+  color: antiquewhite;
+  border: 0px solid black;
+}
+
+#filter--hufflepuff {
+  width: 20%;
+  background-color: goldenrod;
+  color: rgb(21, 21, 21);
+  border: 0px solid black;
+}
+
+#allOnDom {
+  width: 20%;
+  background-color: grey;
+  color: antiquewhite;
+  border: 0px solid black;
+}
+
+#filter--gryffindor:hover {
+  width: 20%;
+  background-color: rgb(133, 53, 53);
+  color: antiquewhite;
+  border: 0px solid black;
+}
+
+#filter--slytherin:hover {
+  width: 20%;
+  background-color: rgb(93, 143, 93);
+  color: antiquewhite;
+  border: 0px solid black;
+}
+
+#filter--ravenclaw:hover {
+  width: 20%;
+  background-color: rgb(66, 66, 140);
+  color: antiquewhite;
+  border: 0px solid black;
+}
+
+#filter--hufflepuff:hover {
+  width: 20%;
+  background-color: rgb(228, 207, 152);
+  color: rgb(21, 21, 21);
+  border: 0px solid black;
+}
+
+#allOnDom:hover {
+  width: 20%;
+  background-color: rgb(210, 210, 210);
+  color: rgb(21, 21, 21);
+  border: 0px solid black;
 }
