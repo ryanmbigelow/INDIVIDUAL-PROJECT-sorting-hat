@@ -1,25 +1,25 @@
 //Arrays
 const studentsArray = [{
     id: 1,
-    name: "Ryan",
-    house: "Slytherin",
-  }, {
-    id: 1,
     name: "Tyler",
     house: "Gryffindor",
   }, {
-    id: 1,
+    id: 2,
+    name: "Ryan",
+    house: "Slytherin",
+  }, {
+    id: 3,
     name: "DeAndre",
     house: "Ravenclaw",
   }, {
-    id: 1,
+    id: 4,
     name: "Dro",
     house: "Hufflepuff",
   }
 ];
 const expelledArray = [
   {
-    id: 1,
+    id: 5,
     name: "Barry",
     house: "Moldy Voldy's Army",
   }
@@ -46,11 +46,10 @@ const randomizerFunction = () => {
   return houseArray[randomizer];
 };
 
-
 //HTML Functions
 const welcomeButtonFunction = () => {
   const domString = `
-  <button type="button" class="btn btn-primary btn-lg">Let's Start Sorting!</button>
+  <button type="button" class="btn btn-info btn-lg">Discover your house</button>
   `;
   renderToDom("#welcomeButtonDOM", domString);
 }
@@ -76,11 +75,11 @@ const filterFunction = () => {
     <div>
       <h4>Filter Students</h4>
       <div id="filterStudents">
-        <button id="#filter--gryffindor" type="button" class="btn btn-primary">Gryffindor</button>
-        <button id="#filter--slytherin" type="button" class="btn btn-success">Slytherin</button>
-        <button id="#filter--ravenclaw" type="button" class="btn btn-danger">Ravenclaw</button>
-        <button id="#filter--hufflepuff" type="button" class="btn btn-warning">Hufflepuff</button>
-        <button type="button" class="btn btn-info">All students</button>
+        <button id="filter--gryffindor" type="button">Gryffindor</button>
+        <button id="filter--slytherin" type="button">Slytherin</button>
+        <button id="filter--ravenclaw" type="button">Ravenclaw</button>
+        <button id="filter--hufflepuff" type="button">Hufflepuff</button>
+        <button id="allOnDom"type="button">All students</button>
       </div>
     </div>
   `;
@@ -93,15 +92,14 @@ const studentCardsFunction = (array) => {
     domString += `
     <div class="card mb-3" style="max-width: 540px;">
       <div class="row g-0">
-        <div class="col-md-4">
-          <img src="..." class="img-fluid rounded-start" alt="...">
+        <div id="${student.house}" class="col-md-4">
         </div>
         <div class="col-md-8">
           <div class="card-body">
             <h5 class="card-title">Sudent: ${student.name}</h5>
             <h5 class="card-title">House: ${student.house}</h5>
           </div>
-          <button id="expelButton" type="button" class="btn btn-secondary">Expel</button>
+          <button id="expel--${student.id}" type="button" class="btn btn-secondary">Expel</button>
         </div>
       </div>
     </div>
@@ -114,9 +112,9 @@ const expelledCardsFunction = (array) => {
   let domString = ``
   for (const student of array) {
     domString += `
-      <div id="expeledStudents">
+      <div id="expelledStudents">
         <div class="card" style="width: 18rem;">
-          <img src="..." class="card-img-top" alt="...">
+          <img src="Voldemort12.jpg" class="card-img-top" alt="...">
           <div class="card-body">
             <p class="card-text">Unfortunately, ${student.name} went over to the dark side!</p>
           </div>
@@ -141,7 +139,22 @@ const newStudent = (event) => {
 }
 form.addEventListener('submit', newStudent)
 
-
+//Expel Students
+const expelFilter = () => {
+  console.log('filter')
+  const expelledStudents = document.querySelector('#studentCardsDOM')
+  expelledStudents.addEventListener('click', (e) => {
+    console.log('event listener')
+    if(e.target.id.includes('expel')) {
+      const [, id] = e.target.id.split('--');
+      const index = studentsArray.findIndex(student => student.id === Number(id));
+      const expelStudent = studentsArray.splice(index, 1);
+      expelledArray.push(expelStudent[0]);
+      studentCardsFunction(studentsArray);
+      expelledCardsFunction(expelledArray);
+    }
+  })
+}
 
 //Filter students
 const filterStudents = () => {
@@ -149,10 +162,11 @@ const filterStudents = () => {
   filter.addEventListener('click', (e) => {
     if(e.target.id.includes("filter")) {
       const [, house] = e.target.id.split('--');
-      const filterStudentsArray = studentsArray.filter(student => student.house === house)
+      const filterStudentsArray = studentsArray.filter(student => student.house.toLowerCase() === house.toLowerCase());
       studentCardsFunction(filterStudentsArray);
-      renderToDom("#studentCardsDOM", filterStudentsArray);
-      console.log(house);
+    }
+    if(e.target.id.includes("allOnDom")) {
+      studentCardsFunction(studentsArray);
     }
   })
 };
@@ -174,6 +188,7 @@ const startApp = () => {
   studentCardsFunction(studentsArray);
   expelledCardsFunction(expelledArray);
   welcomeButtonFunction();
+  expelFilter();
   filterStudents();
 }
 startApp();
